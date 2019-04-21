@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--<script type="text/html" id="thymeleafMsg">-->
+    <!--<p th:text="'当前连接客户端数量:'+${msg}"></p>-->
+<!--</script>-->
+<script>
+    var socket;
+    if(typeof(WebSocket) == "undefined") {
+        console.log("您的浏览器不支持WebSocket");
+    }else{
+        console.log("您的浏览器支持WebSocket");
+        //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
+        socket = new WebSocket("ws://10.26.24.22:8080/websocket/{cid}");
+        //socket = new WebSocket("http://localhost:8080/websocket/${cid}".replace("http","ws"));
+        //打开事件
+        socket.onopen = function() {
+            console.log("Socket 已打开");
+            //socket.send("这是来自客户端的消息" + location.href + new Date());
+        };
+        //获得消息事件
+        socket.onmessage = function(msg) {
+            console.log(msg.data);
+            //发现消息进入    开始处理前端触发逻辑
+            if(event.data){
+                console.log("数据更新啦,新数据为"+event.data);
+            }
+            let str=`当前连接客户端数量:${msg.data}`;
+            let tr = '<tr>'+`${msg.data}`+'</tr>';
+            if (msg.data!='连接成功'){
+                document.getElementById("p2").innerHTML=str;
+            }
+            document.getElementById("table1").innerHTML+=tr;
+        };
+
+        //将消息显示在网页上
+        // function setMessageInnerHTML(innerHTML) {
+        //
+        //     document.getElementById('message').innerHTML += innerHTML + '<br/>';
+        //
+        // }
+        //关闭事件
+        socket.onclose = function() {
+            console.log("Socket已关闭");
+        };
+        //发生了错误事件
+        socket.onerror = function() {
+            alert("Socket发生了错误");
+            //此时可以尝试刷新页面
+        }
+    }
+</script>
+<body id="testdiv">
+    <p id="p2" th:text="'当前连接客户端数量:'+${msg}"></p>
+    历史消息:<br>
+    <table id="table1" border="1px">
+    </table>
+</body>
+</html>
