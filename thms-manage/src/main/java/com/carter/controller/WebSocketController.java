@@ -1,6 +1,8 @@
 package com.carter.controller;
 
-import com.carter.dubbo.service.GetMqttMessageService;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.carter.dubbo.service.GetMqttMessageDubboService;
+import com.carter.dubbo.service.SocketClientDubboService;
 import com.carter.websocket.ScoketClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,8 @@ import javax.annotation.Resource;
 
 @Controller
 public class WebSocketController {
-    @Resource
-   private GetMqttMessageService getMqttMessageServiceImpl;
+    @Reference
+   private SocketClientDubboService socketClientDubboServiceImpl;
 
     @Autowired
     private ScoketClient webScoketClient;
@@ -24,8 +26,7 @@ public class WebSocketController {
 
     @RequestMapping("socketClient")
     public ModelAndView socketClient(Model model) throws Exception {
-        byte[] payload = getMqttMessageServiceImpl.getMqttMessage().getPayload();
-        String msg = new String(payload);
+        String msg = socketClientDubboServiceImpl.msg();
         ModelAndView mav=new ModelAndView("/socket");
         model.addAttribute("msg",msg);
         model.addAttribute("cid",123);
@@ -37,13 +38,13 @@ public class WebSocketController {
 //        return mav;
 //    }
 
-    @RequestMapping("showClient")
-    @ResponseBody
-    public String show() throws Exception {
-        byte[] payload = getMqttMessageServiceImpl.getMqttMessage().getPayload();
-        String s = new String(payload);
-        return s;
-    }
+//    @RequestMapping("showClient")
+//    @ResponseBody
+//    public String show() throws Exception {
+//        byte[] payload = getMqttMessageDubboServiceImpl.getMqttMessage().getPayload();
+//        String s = new String(payload);
+//        return s;
+//    }
 
     @GetMapping("/sendMessage")
     public String sendMessage(String message){

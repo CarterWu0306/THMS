@@ -1,6 +1,8 @@
 package com.carter.pojo;
 
-public class Device {
+import java.io.Serializable;
+
+public class Device implements Serializable {
     private String deviceid;
 
     private String clientid;

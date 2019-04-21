@@ -12,7 +12,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @Component
 public class Client2 {
-    public static final String SERVER_URL = "tcp://ip:1883";
+    public static final String SERVER_URL = "tcp://115.29.175.26:1883";
     public static final String TOPIC = "$SYS/broker/clients/connected";
     public static final String clientid  = "client2";
 

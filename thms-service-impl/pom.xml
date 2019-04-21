@@ -32,12 +32,63 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!--添加io.dubbo.springboot依赖-->
+        <dependency>
+            <groupId>io.dubbo.springboot</groupId>
+            <artifactId>spring-boot-starter-dubbo</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <!--去除dubbo依赖-->
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>dubbo</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--重新添加2.6.2的dubbo依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <!--zookeeper-->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--zookeeper客户端-->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>2.12.0</version>
         </dependency>
     </dependencies>
 

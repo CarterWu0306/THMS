@@ -28,8 +28,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!--去除自带的log4j-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -40,11 +46,56 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--websocket作为客户端-->
+        <!--log4j-->
         <dependency>
-            <groupId>org.java-websocket</groupId>
-            <artifactId>Java-WebSocket</artifactId>
-            <version>1.3.5</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
+            <version>1.3.8.RELEASE</version>
+        </dependency>
+        <!--添加io.dubbo.springboot依赖-->
+        <dependency>
+            <groupId>io.dubbo.springboot</groupId>
+            <artifactId>spring-boot-starter-dubbo</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <!--去除dubbo依赖-->
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>dubbo</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--重新添加2.6.2的dubbo依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <!--zookeeper-->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>2.1.3.RELEASE</version>
         </dependency>
         <!--thymeleaf-->
         <dependency>

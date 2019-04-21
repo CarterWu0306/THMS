@@ -1,19 +1,20 @@
 package com.carter.dubbo.service.impl;
 
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.carter.client.Client2;
-import com.carter.dubbo.service.GetMqttMessageService;
+import com.carter.dubbo.service.GetMqttMessageDubboService;
 import com.carter.pojo.ResponseMessage;
 import com.carter.server.PushCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import javax.annotation.Resource;
 
 
 @Service
-public class GetMqttMessageServiceImpl implements GetMqttMessageService {
+public class GetMqttMessageDubboServiceImpl implements GetMqttMessageDubboService {
 
     @Resource
     private Client2 client2;

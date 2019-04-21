@@ -2,7 +2,9 @@ package com.carter.pojo;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-public class ResponseMessage {
+import java.io.Serializable;
+
+public class ResponseMessage implements Serializable {
 
     private MqttMessage mqttMessage;
 
